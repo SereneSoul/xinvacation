@@ -15,4 +15,9 @@ public class Const {
      * token过期时间
      */
     public static final Integer TOKENEXTIME = 60 * 10;
+
+    /**
+     * cookie名称
+     */
+    public static final String COOKIENAME = "xinvacation";
 }

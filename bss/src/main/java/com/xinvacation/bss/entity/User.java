@@ -1,35 +1,51 @@
 package com.xinvacation.bss.entity;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+import org.springframework.data.jpa.domain.support.AuditingEntityListener;
+
+import javax.persistence.*;
+import javax.validation.constraints.Min;
 import java.util.Date;
 
 /**
  * @author lijiayin
  */
 @Entity
+@Table(name = "t_user")
+@EntityListeners(AuditingEntityListener.class)
 public class User {
     @Id
     @GeneratedValue
     private Integer id;
-
+    
+    @Column(nullable = false,length = 32)
     private String name;
 
+    @Column(nullable = false,length = 32)
     private String password;
 
+    @Column(length = 64)
     private String email;
 
+    @Column(length = 16)
     private String phone;
 
+    @Column(length = 2000)
     private String question;
 
+    @Column(length = 2000)
     private String answer;
 
+    @Column(nullable = false,length = 1)
     private Integer role;
 
+    @CreatedDate
+    @Column(nullable = false)
     private Date createTime;
 
+    @LastModifiedDate
+    @Column(nullable = false)
     private Date updateTime;
 
     public Integer getId() {
