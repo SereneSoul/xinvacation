@@ -21,4 +21,7 @@ spring:
           max-idle: 8
           max-wait: -1
           min-idle: 0
-  
+message:
+  app-id: 1400181326
+  app-key: 784ec38a7b960e7e6691a13ac25c6644
+  sms-sign: 温馨假日

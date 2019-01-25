@@ -1,7 +1,9 @@
 package com.xinvacation.bss.service.impl;
 
+import com.github.qcloudsms.SmsSingleSenderResult;
 import com.xinvacation.base.common.ResponseResult;
 import com.xinvacation.base.service.BaseService;
+import com.xinvacation.base.service.SendMessageService;
 import com.xinvacation.base.util.MD5Util;
 import com.xinvacation.bss.entity.User;
 import com.xinvacation.bss.repository.IUserRepository;
@@ -10,6 +12,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Random;
 
 @Service
 @Slf4j
@@ -86,4 +90,20 @@ public class UserServiceImpl extends BaseService implements IUserService {
         }
         return result;
     }
+
+    @Override
+    public ResponseResult sendRegisterVerifyCode(String phone, String verifyCode) {
+        ResponseResult result = new ResponseResult();
+        result.setSuccess(false);
+        try {
+            SmsSingleSenderResult smsSingleSenderResult = sendMessageService.sendMessage(new String[]{verifyCode},phone,123);
+            
+        }catch (Exception e){
+            log.error("短信发送失败：" + e.getMessage());
+            result.setMsg("短信发送失败：" + e.getMessage());
+        }
+        return result;
+    }
+
+
 }

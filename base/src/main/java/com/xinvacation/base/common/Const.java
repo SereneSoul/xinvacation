@@ -4,20 +4,20 @@ public class Const {
     /**
      * redis过期时间
      */
-    public static final Integer REDISEXTIME = 60 * 30;
+    public static final Integer REDIS_EX_TIME = 60 * 30;
 
     /**
      * token前缀
      */
-    public static final String TOKENPREFIX = "token_";
+    public static final String TOKEN_PREFIX = "token_";
 
     /**
      * token过期时间
      */
-    public static final Integer TOKENEXTIME = 60 * 10;
+    public static final Integer TOKEN_EX_TIME = 60 * 10;
 
     /**
-     * cookie名称
+     * 验证码过期时间
      */
-    public static final String COOKIENAME = "xinvacation";
+    public static final Integer VERIFY_CODE_EX_TIME = 60 * 5;
 }

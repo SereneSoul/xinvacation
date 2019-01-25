@@ -6,4 +6,5 @@ import com.xinvacation.bss.entity.User;
 public interface IUserService {
     ResponseResult login(String name, String password);
     ResponseResult register(User user);
+    ResponseResult sendRegisterVerifyCode(String phone, String verifyCode);
 }

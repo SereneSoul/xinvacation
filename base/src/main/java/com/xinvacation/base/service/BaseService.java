@@ -9,4 +9,7 @@ import org.springframework.stereotype.Service;
 public class BaseService {
     @Autowired
     protected RedisService redis;
+    
+    @Autowired
+    protected SendMessageService sendMessageService;
 }

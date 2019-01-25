@@ -1,6 +1,5 @@
 package com.xinvacation.bss.controller;
 
-import com.alibaba.fastjson.JSON;
 import com.xinvacation.base.common.Const;
 import com.xinvacation.base.common.ResponseResult;
 import com.xinvacation.base.controller.BaseController;
@@ -14,10 +13,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.util.Random;
 
 @RestController
 @RequestMapping("/user")
@@ -32,7 +31,7 @@ public class UserController extends BaseController {
         ResponseResult result = userService.login(name, password);
         if (result.isSuccess()) {
             CookieUtil.writeLoginToken(httpServletResponse,httpSession.getId());
-            redis.set(httpSession.getId(), JsonUtil.objToString(result.getData()), Const.REDISEXTIME);
+            redis.set(httpSession.getId(), JsonUtil.objToString(result.getData()), Const.REDIS_EX_TIME);
         }
         return result;
     }
@@ -62,6 +61,25 @@ public class UserController extends BaseController {
             result.setMsg("用户注销成功！");
         }catch (Exception e){
             result.setMsg("用户注销失败：" + e.getMessage());
+        }
+        return result;
+    }
+
+    @RequestMapping("/phoneRegister")
+    public ResponseResult phoneRegister(String phone, String verifyCode) {
+        ResponseResult result = new ResponseResult();
+        result.setSuccess(false);
+        //TODO
+        return result;
+    }
+
+    @RequestMapping("/sendRegisterVerifyCode")
+    public ResponseResult sendRegisterVerifyCode(HttpSession httpSession, String phone) {
+        String verifyCode = String
+                .valueOf(new Random().nextInt(899999) + 100000);
+        ResponseResult result = userService.sendRegisterVerifyCode(phone,verifyCode);
+        if(result.isSuccess()){
+            redis.set(httpSession.getId(),verifyCode,Const.VERIFY_CODE_EX_TIME);
         }
         return result;
     }
